@@ -13,25 +13,39 @@ import entitites.Instructor;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        Course course = new Course("Yazılım",1);
-        Category category=new Category("Programlama");
-        Instructor instructor = new Instructor("Engin","Demiroğ");
-
-        Logger[] loggers = new Logger[]{new DataLogger(),new FileLogger(),new MailLogger()};
+        Logger[] loggers = {new FileLogger(),new DataLogger(), new MailLogger()};
         System.out.println("************************");
 
-        CourseManager courseManager = new CourseManager(new Jdbc(),loggers);
-        courseManager.add(course);
+        Course course1 = new Course("Java",1);
+        Course course2 = new Course("Python",5000);
+        Course[] courses = {course1};
 
-        System.out.println("************************");
-
-        CategoryManager categoryManager = new CategoryManager(new Jdbc(),loggers);
-        categoryManager.add(category);
+        CourseManager courseManager = new CourseManager(new HibernateDao(),loggers);
+        courseManager.add(course1);
 
         System.out.println("************************");
 
-        InstructorManager instructorManager = new InstructorManager(new HibernateDao(),loggers);
-        instructorManager.add(instructor);
+        Instructor instructor1 = new Instructor("Engin", "DEMİROĞ");
+        Instructor instructor2 = new Instructor("Halit Enes", "KALAYCI");
+        InstructorManager instructorManager = new InstructorManager(new Jdbc(),loggers);
+        instructorManager.add(instructor1);
+
+
+        System.out.println("************************");
+
+        Category category1 = new Category("Programlama");
+        Category category2 = new Category("Algoritma");
+
+
+        Category[] categories = { category2 };
+
+
+        CategoryManager categoryManager = new CategoryManager(new Jdbc(),loggers,categories);
+        categoryManager.add(category1);
+
+
+
+
 
     }
 }

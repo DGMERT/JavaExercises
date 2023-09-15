@@ -13,7 +13,7 @@ public class InstructorManager {
         this.loggers = loggers;
     }
     public void add(Instructor instructor){
-        System.out.println("Eğitmen ismi tekrar edemez");
+
 
         instructorDao.add(instructor);
 
